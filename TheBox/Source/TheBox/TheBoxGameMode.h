@@ -24,6 +24,13 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	class UDataTable* CluesDB; // Clues database database
+
+	class UFileDownloader* FileDownloader;
+
+	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnDownloadEnd(const EDownloadResult Result);
 };
 
 

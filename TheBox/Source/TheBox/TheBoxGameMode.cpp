@@ -3,6 +3,7 @@
 #include "TheBoxGameMode.h"
 #include "TheBoxPlayerController.h"
 #include "TheBoxPawn.h"
+#include "FileDownloader.h"
 
 ATheBoxGameMode::ATheBoxGameMode()
 {
@@ -10,9 +11,52 @@ ATheBoxGameMode::ATheBoxGameMode()
 	DefaultPawnClass = ATheBoxPawn::StaticClass();
 	// use our own player controller class
 	PlayerControllerClass = ATheBoxPlayerController::StaticClass();
+
 }
 
+void ATheBoxGameMode::BeginPlay()
+{
+	Super::BeginPlay();
 
+	FileDownloader = UFileDownloader::MakeDownloader();
+
+	if (FileDownloader != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::ATheBoxGameMode FileDownloader not null"));
+		FileDownloader->OnResult.AddDynamic(this, &ATheBoxGameMode::OnDownloadEnd);
+
+		const FString url = "http://beatrizcv.com/Data/TreasureHunter/TreasureHunterData.json";
+		FString savePath = "D://Downloads//TestDownloads//TreasureHunterData.json";
+		FileDownloader->DownloadFile(url, savePath);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::ATheBoxGameMode FileDownloader  NULL"));
+	}
+	
+
+}
+
+void ATheBoxGameMode::OnDownloadEnd(const EDownloadResult Result)
+{
+	switch (Result)
+	{
+		case EDownloadResult::Success:
+			UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::OnDownloadEnd EDownloadResult::Success"));
+		break;
+		case EDownloadResult::SaveFailed:
+			UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::OnDownloadEnd EDownloadResult::SaveFailed"));
+			break;
+		case EDownloadResult::DownloadFailed:
+			UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::OnDownloadEnd EDownloadResult::DownloadFailed"));
+			break;
+		case EDownloadResult::DirectoryCreationFailed:
+			UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::OnDownloadEnd EDownloadResult::DirectoryCreationFailed"));
+			break;
+	}
+
+	
+}
 
 FClues ATheBoxGameMode::GetClueByID(int32 id) const
 {
