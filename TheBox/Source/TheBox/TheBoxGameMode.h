@@ -22,12 +22,28 @@ public:
 
 protected:
 
-	UPROPERTY(EditDefaultsOnly)
-	class UDataTable* CluesDB; // Clues database database
+	UPROPERTY(EditDefaultsOnly, Category = "Settings")
+	class UDataTable* CluesDB; 
+
+	UPROPERTY(EditDefaultsOnly, Category = "Data Settings")
+	FString DataServerUrl;  
+
+	UPROPERTY(EditDefaultsOnly, Category = "Data Settings")
+	FString LocalDownloadPath;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Data Settings")
+	FString CluesFileName;
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
 
 	class UFileDownloader* FileDownloader;
+	FString CluesLocalSavePath;
 
-	virtual void BeginPlay() override;
+	UPROPERTY(EditDefaultsOnly, Category = "Data Settings")
+	class UDataTable* LocalCluesDB; 
 
 	UFUNCTION()
 	void OnDownloadEnd(const EDownloadResult Result);
