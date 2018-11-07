@@ -33,9 +33,9 @@ void ATheBoxGameMode::BeginPlay()
 
 		FString dataFolder = "Data";
 		FString cluesServerUrl = FPaths::Combine(DataServerUrl, CluesFileName);
-		CluesLocalSavePath = FPaths::Combine(FPaths::GameContentDir(), dataFolder, CluesFileName);
+		CluesLocalSavePath = FPaths::Combine(FPaths::ProjectContentDir(), dataFolder, CluesFileName);
 
-		FString gamecontent = FPaths::GameContentDir();
+		FString gamecontent = FPaths::ProjectContentDir();
 
 		UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::ATheBoxGameMode GameContentDir %s "), *gamecontent);
 
@@ -95,8 +95,8 @@ void ATheBoxGameMode::OnDownloadEnd(const EDownloadResult Result)
 		return;
 
 	}
-	//UDataTable* LocalCluesDB = new 
-	TArray<FString> errors = LocalCluesDB->CreateTableFromCSVString(FileContent);
+
+	TArray<FString> errors = CluesDB->CreateTableFromCSVString(FileContent);
 
 	if (errors.Num() > 0)
 	{
@@ -108,8 +108,8 @@ void ATheBoxGameMode::OnDownloadEnd(const EDownloadResult Result)
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::OnDownloadEnd No errors found"));
-		FName rowName = FName(*FString::FromInt(3));
-		FClues* row = LocalCluesDB->FindRow<FClues>(rowName, FString(""), true);
+		/*FName rowName = FName(*FString::FromInt(3));
+		FClues* row = CluesDB->FindRow<FClues>(rowName, FString(""), true);
 		if (row != nullptr)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] Trying to find row %s =  %s"), *row->Clue.ToString(), *row->Solution.ToString());
@@ -117,23 +117,22 @@ void ATheBoxGameMode::OnDownloadEnd(const EDownloadResult Result)
 		else
 		{
 			UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] Row %s not found"), *rowName.ToString());
-		}
+		}*/
 
+		OnDataLoadedEvent();
 	}
-
-
-	
-
 	
 }
 
 FClues ATheBoxGameMode::GetClueByID(int32 id) const
 {
 	FClues result;
+	result.Clue = FText::GetEmpty();
+	result.Solution = FText::GetEmpty();
 
 	if (CluesDB == nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::GetObjectByID ObjectDB doesn't exist"));
+		UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::GetObjectByID] CluesDB doesn't exist"));
 		return result;
 	}
 
@@ -148,7 +147,7 @@ FClues ATheBoxGameMode::GetClueByID(int32 id) const
 		return result;
 	}
 
-	//CluesDB->RowMap[]
+
 	FName rowName = FName(*FString::FromInt(id));
 
 	UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::GetObjectByID] Trying to find row %s"), *rowName.ToString());
