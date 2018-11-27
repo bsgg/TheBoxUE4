@@ -13,17 +13,17 @@ UCLASS()
 class THEBOX_API UInGameUI : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "UI")
-	void SetText(FText Text);
-	
+		void SetText(FText Text);
+
 protected:
 	virtual bool Initialize();
 
 private:
 
 	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* MessagesTxt;
+		class UTextBlock* MessagesTxt;
 	
 };

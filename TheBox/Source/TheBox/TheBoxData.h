@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
 
-
 #include "TheBoxData.generated.h"
 
 /**
@@ -18,6 +17,7 @@ public:
 	~TheBoxData();
 };
 
+
 //// Clues //////////////////////
 USTRUCT(BlueprintType)
 struct FClues : public FTableRowBase
@@ -27,9 +27,9 @@ struct FClues : public FTableRowBase
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FText Clue;
+		FText Clue;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FText Solution;
+		FText Solution;
 };
 //// Clues //////////////////////

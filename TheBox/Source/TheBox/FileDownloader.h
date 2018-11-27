@@ -7,6 +7,7 @@
 #include "Http.h"
 #include "FileDownloader.generated.h"
 
+
 /**
 * Possible results from a download request.
 */
@@ -22,15 +23,13 @@ enum class EDownloadResult : uint8
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnResult, const EDownloadResult, Result);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnProgress, const int32, BytesSent, const int32, BytesReceived, const int32, ContentLength);
 
-/**
-* Download a file from a URL and save it locally.
-*/
 UCLASS(BlueprintType, Category = "HTTP")
 class THEBOX_API UFileDownloader : public UObject
 {
 	GENERATED_BODY()
-	
+
 public:
+
 	/**
 	* Bind to know when the download is complete (even if it fails).
 	*/
@@ -73,12 +72,10 @@ public:
 	* @return Returns itself.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "HTTP")
-	UFileDownloader* DownloadFile(const FString& Url, FString SavePath);
+		UFileDownloader* DownloadFile(const FString& Url, FString SavePath);
 
 private:
 
 	void OnReady(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
 	void OnProgress_Internal(FHttpRequestPtr Request, int32 BytesSent, int32 BytesReceived);
-	
-	
 };

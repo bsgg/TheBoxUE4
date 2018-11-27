@@ -13,7 +13,6 @@ ATheBoxGameMode::ATheBoxGameMode()
 	DefaultPawnClass = ATheBoxPawn::StaticClass();
 	// use our own player controller class
 	PlayerControllerClass = ATheBoxPlayerController::StaticClass();
-
 }
 
 void ATheBoxGameMode::BeginPlay()
@@ -47,7 +46,7 @@ void ATheBoxGameMode::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ATheBoxGameMode::ATheBoxGameMode FileDownloader  NULL"));
 	}
-	
+
 
 }
 
@@ -55,23 +54,23 @@ void ATheBoxGameMode::OnDownloadEnd(const EDownloadResult Result)
 {
 	switch (Result)
 	{
-		case EDownloadResult::Success:
-			UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::Success"));
+	case EDownloadResult::Success:
+		UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::Success"));
 
-			UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] The file was saved  on %s"), *CluesLocalSavePath);
+		UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] The file was saved  on %s"), *CluesLocalSavePath);
 		break;
-		case EDownloadResult::SaveFailed:
-			UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::SaveFailed"));
-			break;
-		case EDownloadResult::DownloadFailed:
-			UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::DownloadFailed"));
-			break;
-		case EDownloadResult::DirectoryCreationFailed:
-			UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::DirectoryCreationFailed"));
-			break;
+	case EDownloadResult::SaveFailed:
+		UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::SaveFailed"));
+		break;
+	case EDownloadResult::DownloadFailed:
+		UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::DownloadFailed"));
+		break;
+	case EDownloadResult::DirectoryCreationFailed:
+		UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::OnDownloadEnd] EDownloadResult::DirectoryCreationFailed"));
+		break;
 	}
 
-	
+
 	if (Result != EDownloadResult::Success)
 	{
 		return;
@@ -121,7 +120,7 @@ void ATheBoxGameMode::OnDownloadEnd(const EDownloadResult Result)
 
 		OnDataLoadedEvent();
 	}
-	
+
 }
 
 FClues ATheBoxGameMode::GetClueByID(int32 id) const
@@ -136,10 +135,10 @@ FClues ATheBoxGameMode::GetClueByID(int32 id) const
 		return result;
 	}
 
-	int32 nClues = CluesDB->RowMap.Num();
+	int32 nClues = CluesDB->GetRowMap().Num();
 
 	UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::GetObjectByID] Number Clues: %i"), nClues);
-	
+
 	if ((id < 0) || (id >= nClues))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("[ATheBoxGameMode::GetObjectByID] id %i out of range"), id);

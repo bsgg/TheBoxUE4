@@ -9,5 +9,3 @@ TheBoxData::TheBoxData()
 TheBoxData::~TheBoxData()
 {
 }
-
-

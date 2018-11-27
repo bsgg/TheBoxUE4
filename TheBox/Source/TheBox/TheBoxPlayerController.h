@@ -14,9 +14,6 @@ class ATheBoxPlayerController : public APlayerController
 
 public:
 	ATheBoxPlayerController();
-
-protected:
-	virtual void BeginPlay() override;
 };
 
 

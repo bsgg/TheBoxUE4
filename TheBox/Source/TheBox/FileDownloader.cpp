@@ -4,17 +4,16 @@
 #include "Misc/Paths.h"
 #include "HAL/PlatformFilemanager.h"
 
-
 UFileDownloader::UFileDownloader() :
 	FileUrl(TEXT(""))
 	, FileSavePath(TEXT(""))
 {
 }
 
-
 UFileDownloader::~UFileDownloader()
 {
 }
+
 
 UFileDownloader* UFileDownloader::MakeDownloader()
 {
@@ -89,4 +88,3 @@ void UFileDownloader::OnProgress_Internal(FHttpRequestPtr Request, int32 BytesSe
 	int32 FullSize = Request->GetContentLength();
 	OnProgress.Broadcast(BytesSent, BytesReceived, FullSize);
 }
-

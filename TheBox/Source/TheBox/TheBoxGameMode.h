@@ -7,7 +7,7 @@
 #include "TheBoxData.h"
 #include "TheBoxGameMode.generated.h"
 
-// Delegate MoveComponent
+// Delegate DataLoaded
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDataLoaded);
 
 /** GameMode class to specify pawn and playercontroller */
@@ -17,7 +17,7 @@ class ATheBoxGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	ATheBoxGameMode();
+	ATheBoxGameMode(); 
 
 	// Declaring a variable to store the delegate:
 	UPROPERTY(BlueprintAssignable, Category = "Data")
@@ -32,18 +32,16 @@ public:
 protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Settings")
-	class UDataTable* CluesDB; 
+		class UDataTable* CluesDB;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Data Settings")
-	FString DataServerUrl;  
+		FString DataServerUrl;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Data Settings")
-	FString LocalDownloadPath;
+		FString LocalDownloadPath;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Data Settings")
-	FString CluesFileName;
-
-
+		FString CluesFileName;
 
 protected:
 	virtual void BeginPlay() override;
@@ -53,11 +51,9 @@ private:
 	class UFileDownloader* FileDownloader;
 	FString CluesLocalSavePath;
 
-	
-
-
 	UFUNCTION()
 	void OnDownloadEnd(const EDownloadResult Result);
+
 };
 
 

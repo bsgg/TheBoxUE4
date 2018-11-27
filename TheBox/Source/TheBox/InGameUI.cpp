@@ -3,7 +3,6 @@
 #include "InGameUI.h"
 #include "Components/TextBlock.h"
 
-
 bool UInGameUI::Initialize()
 {
 	bool sucess = Super::Initialize();
@@ -17,5 +16,3 @@ void UInGameUI::SetText(FText Text)
 {
 	MessagesTxt->SetText(Text);
 }
-
-
