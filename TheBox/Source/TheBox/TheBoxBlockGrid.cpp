@@ -17,12 +17,31 @@ ATheBoxBlockGrid::ATheBoxBlockGrid()
 	ScoreText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("ScoreText0"));
 	ScoreText->SetRelativeLocation(FVector(200.f,0.f,0.f));
 	ScoreText->SetRelativeRotation(FRotator(90.f,0.f,0.f));
-	ScoreText->SetText(FText::Format(LOCTEXT("ScoreFmt", "Score: {0}"), FText::AsNumber(0)));
+
+	IndexABC = 0;
+	ABCArray = { "0", "1",  "2", "A",  "B",  "C",  "D",  "E",  "G",  "H", "I", "J", "K", "L", "M", "O", "P", "Q", "R", "S", "T", "U", "V", "W",  "X",  "Y", "Z" };
+
+
+	FText abc = FText::FromString(ABCArray[IndexABC]);
+	ScoreText->SetText(abc);
+
+	//FString str = FString(UTF8_TO_TCHAR(ABCText[IndexABC]));
+
+	//FText abc = FText::FromString(str);
+
+
+	//ScoreText->SetText(abc);
+
+	//ScoreText->SetText(FText::Format(LOCTEXT("ScoreFmt", "Score: {0}"), FText::AsNumber(0)));
 	ScoreText->SetupAttachment(DummyRoot);
 
 	// Set defaults
 	Size = 3;
 	BlockSpacing = 300.f;
+
+	
+
+	
 }
 
 
@@ -53,6 +72,20 @@ void ATheBoxBlockGrid::BeginPlay()
 	}
 }
 
+
+void ATheBoxBlockGrid::AdvancedABC()
+{
+	IndexABC++;
+
+	if (IndexABC >= ABCArray.Num())
+	{
+		IndexABC = ABCArray.Num() - 1;
+	}
+
+	FText abc = FText::FromString(ABCArray[IndexABC]);
+	ScoreText->SetText(abc);	
+
+}
 
 void ATheBoxBlockGrid::AddScore()
 {

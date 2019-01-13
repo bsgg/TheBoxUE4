@@ -23,6 +23,10 @@ class ATheBoxBlockGrid : public AActor
 public:
 	ATheBoxBlockGrid();
 
+	int32 IndexABC;
+	TArray<FString> ABCArray;
+
+
 	/** How many blocks have been clicked */
 	int32 Score;
 
@@ -43,6 +47,10 @@ public:
 
 	/** Handle the block being clicked */
 	void AddScore();
+
+
+	void AdvancedABC();
+
 
 	/** Returns DummyRoot subobject **/
 	FORCEINLINE class USceneComponent* GetDummyRoot() const { return DummyRoot; }

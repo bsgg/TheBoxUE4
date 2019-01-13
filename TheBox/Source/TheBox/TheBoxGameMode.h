@@ -29,6 +29,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Data")
 	FClues GetClueByID(int32 id) const;
 
+	UFUNCTION(BlueprintCallable, Category = "Data")
+	FClues GetCurrentClue() const;
+
 protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Settings")
@@ -47,6 +50,8 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+
+	int32 ClueIndex;
 
 	class UFileDownloader* FileDownloader;
 	FString CluesLocalSavePath;

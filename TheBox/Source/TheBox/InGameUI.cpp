@@ -16,3 +16,8 @@ void UInGameUI::SetText(FText Text)
 {
 	MessagesTxt->SetText(Text);
 }
+
+void UInGameUI::SetCharacterText(FText Text)
+{
+	ABCTxt->SetText(Text);
+}

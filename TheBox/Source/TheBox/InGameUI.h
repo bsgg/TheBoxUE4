@@ -16,7 +16,10 @@ class THEBOX_API UInGameUI : public UUserWidget
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "UI")
-		void SetText(FText Text);
+	void SetText(FText Text);
+
+	UFUNCTION(BlueprintCallable, Category = "UI")
+	void SetCharacterText(FText Text);
 
 protected:
 	virtual bool Initialize();
@@ -24,6 +27,9 @@ protected:
 private:
 
 	UPROPERTY(meta = (BindWidget))
-		class UTextBlock* MessagesTxt;
+	class UTextBlock* MessagesTxt;
+
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* ABCTxt;
 	
 };

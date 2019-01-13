@@ -17,7 +17,7 @@ UFileDownloader::~UFileDownloader()
 
 UFileDownloader* UFileDownloader::MakeDownloader()
 {
-	UFileDownloader* Downloader = NewObject<UFileDownloader>();
+	UFileDownloader* Downloader = NewObject<UFileDownloader>(); 
 	return Downloader;
 }
 

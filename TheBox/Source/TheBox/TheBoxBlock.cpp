@@ -44,6 +44,9 @@ ATheBoxBlock::ATheBoxBlock()
 	BaseMaterial = ConstructorStatics.BaseMaterial.Get();
 	BlueMaterial = ConstructorStatics.BlueMaterial.Get();
 	OrangeMaterial = ConstructorStatics.OrangeMaterial.Get();
+
+	
+
 }
 
 void ATheBoxBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey ButtonClicked)
@@ -70,7 +73,8 @@ void ATheBoxBlock::HandleClicked()
 		// Tell the Grid
 		if (OwningGrid != nullptr)
 		{
-			OwningGrid->AddScore();
+			//OwningGrid->AddScore();
+			OwningGrid->AdvancedABC();
 		}
 	}
 }

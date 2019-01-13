@@ -13,6 +13,8 @@ ATheBoxGameMode::ATheBoxGameMode()
 	DefaultPawnClass = ATheBoxPawn::StaticClass();
 	// use our own player controller class
 	PlayerControllerClass = ATheBoxPlayerController::StaticClass();
+
+	ClueIndex = 1;
 }
 
 void ATheBoxGameMode::BeginPlay()
@@ -164,4 +166,9 @@ FClues ATheBoxGameMode::GetClueByID(int32 id) const
 	}
 
 	return (result);
+}
+
+FClues ATheBoxGameMode::GetCurrentClue() const
+{
+	return (GetClueByID(ClueIndex));
 }
