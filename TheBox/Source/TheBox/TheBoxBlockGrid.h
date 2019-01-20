@@ -20,6 +20,8 @@ class ATheBoxBlockGrid : public AActor
 	UPROPERTY(Category = Grid, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UTextRenderComponent* ScoreText;
 
+
+
 public:
 	ATheBoxBlockGrid();
 

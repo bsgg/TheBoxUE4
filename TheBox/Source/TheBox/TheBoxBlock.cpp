@@ -65,7 +65,7 @@ void ATheBoxBlock::HandleClicked()
 	// Check we are not already active
 	if (!bIsActive)
 	{
-		bIsActive = true;
+		//bIsActive = true;
 
 		// Change material
 		BlockMesh->SetMaterial(0, OrangeMaterial);
